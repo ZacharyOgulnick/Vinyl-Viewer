@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("vinyls")
+@RequestMapping("api/v1/vinyls")
 public class VinylController {
 
   private final VinylService vinylService;
