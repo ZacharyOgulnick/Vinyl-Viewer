@@ -1,5 +1,6 @@
 package com.vinyl_viewer.Vinyl.Viewer.vinyl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,33 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("api/v1/vinyls")
+@RequestMapping("/vinyls")
 public class VinylController {
 
   private final VinylService vinylService;
 
-  @Autowired
-  public VinylController(VinylService vinylService) {
-    this.vinylService = vinylService;
-  }
-
-  @GetMapping
+  @GetMapping("/list")
   public List<Vinyl> getVinyls() {
     return vinylService.geVinyls();
   }
 
-  @PostMapping
+  @PostMapping("/add")
   public void addVinyl(@RequestBody Vinyl vinylToAdd) {
     vinylService.addVinyl(vinylToAdd);
   }
 
-  @DeleteMapping("{vinylId}")
+  @DeleteMapping("/delete/{vinylId}")
   public void deleteVinyl(@PathVariable("vinylId") Integer id) {
     vinylService.deleteVinyl(id);
   }
 
-  @PutMapping("{vinylId}")
+  @PutMapping("/update/{vinylId}")
   public void updateVinyl(@PathVariable("vinylId") Integer id, @RequestBody Vinyl vinylDetails) {
     vinylService.updateVinyl(id, vinylDetails);
   }
